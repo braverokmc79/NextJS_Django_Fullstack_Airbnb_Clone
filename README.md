@@ -4,7 +4,7 @@
 
 ## 📚 강의 개요
 
-본 프로젝트는 다음 기술들을 실제 서비스처럼 연동하여 학습할 수 있는 종합 풀스택 강의입니다.
+본 프로젝트는 다음 기술들을 실제 서비스처럼 연동하여 학습할 수 있다.
 
 - **Frontend**: Next.js 15+ (App Router), TypeScript, TailwindCSS, Zustand 등
 - **Backend**: Django, Django REST Framework, JWT 인증
@@ -123,10 +123,5 @@ nextjs-django-airbnb/
 ## 👨‍💻 만든 이유
 
 - 편저 : [코담](https://codam.kr)
-
-- 실전에서 사용하는 기술들을 종합적으로 경험해보고 싶어서
-- 풀스택 개발자로서 백엔드/프론트엔드/DevOps 전체 흐름을 이해하기 위해
-- Airbnb 같은 복잡한 구조의 프로젝트를 직접 구현해보고 싶어서
-
 ---
 
