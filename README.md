@@ -130,8 +130,3 @@ nextjs-django-airbnb/
 
 ---
 
-## 🙌 참고 및 출처
-
-- 강의: [Code With Stein - Next.js & Django Airbnb Clone](https://www.youtube.com/@CodeWithStein)
-- 공식 문서: Next.js, Django, Tailwind, DRF, Docker 등
-
