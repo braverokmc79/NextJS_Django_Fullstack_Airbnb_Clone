@@ -130,5 +130,3 @@ export default function Home() {
 
 ---
 
-이후 2강에서는 Django 백엔드 세팅과 JWT 인증 구조를 연결하는 작업으로 넘어갑니다.
-
