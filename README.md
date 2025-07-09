@@ -14,17 +14,17 @@
 
 ---
 
-## 🎥 강의 시리즈 (총 9부작)
+## 🎥 총 9부작
 
-1. [**Part 1**](https://youtu.be/YJ2n7xSLGjA) - Next.js, Django 프로젝트 구조, 기본 설정
-2. [**Part 2**](https://youtu.be/XXXXXXXXXXX) - 프론트엔드 구조, Tailwind 설정 및 컴포넌트 구성
-3. [**Part 3**](https://youtu.be/XXXXXXXXXXX) - Django 모델링 및 API 개발 (숙소, 유저 등)
-4. [**Part 4**](https://youtu.be/XXXXXXXXXXX) - 숙소 등록 기능, 이미지 업로드
-5. [**Part 5**](https://youtu.be/XXXXXXXXXXX) - 예약 기능 및 달력 구현
-6. [**Part 6**](https://youtu.be/XXXXXXXXXXX) - 유저 인증 및 보호된 페이지
-7. [**Part 7**](https://youtu.be/XXXXXXXXXXX) - 실시간 채팅 기능 구현
-8. [**Part 8**](https://youtu.be/XXXXXXXXXXX) - 관리자 기능, 예약/숙소 관리
-9. [**Part 9**](https://youtu.be/XXXXXXXXXXX) - Docker로 배포, Nginx/Gunicorn 설정
+1. [**Part 1**] - Next.js, Django 프로젝트 구조, 기본 설정
+2. [**Part 2**] - 프론트엔드 구조, Tailwind 설정 및 컴포넌트 구성
+3. [**Part 3**] - Django 모델링 및 API 개발 (숙소, 유저 등)
+4. [**Part 4**]- 숙소 등록 기능, 이미지 업로드
+5. [**Part 5**] - 예약 기능 및 달력 구현
+6. [**Part 6**] - 유저 인증 및 보호된 페이지
+7. [**Part 7**] - 실시간 채팅 기능 구현
+8. [**Part 8**]- 관리자 기능, 예약/숙소 관리
+9. [**Part 9**] - Docker로 배포, Nginx/Gunicorn 설정
 
 > 🔗 영상 링크는 위 내용을 프로젝트에 맞게 수정해주세요. (추후 실제 링크로 업데이트)
 

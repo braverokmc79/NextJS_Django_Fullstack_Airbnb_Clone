@@ -1,0 +1,47 @@
+# Python 패키지 요구사항
+# 설치 시: $env:PYTHONUTF8=1; pip install -r requirements.txt
+
+# Django 프레임워크
+Django==5.2.1
+
+# Django REST Framework 관련
+djangorestframework==3.14.0
+djangorestframework-simplejwt==5.3.1
+dj-rest-auth==4.0.0                  # 인증/회원가입 API 지원
+django-allauth==0.52.0               # 소셜 로그인 연동
+
+# API 유틸리티
+markdown                             # 마크다운 렌더링 (DRF Browsable API)
+django-filter                        # 필터 기능
+pygments                             # 코드 하이라이팅
+
+# CORS (Cross-Origin Resource Sharing)
+django-cors-headers==4.3.1
+
+# 환경 변수 및 설정 관리
+django-environ                        # .env 파일 기반 설정
+python-dotenv==1.0.1
+
+# ASGI, 비동기 처리
+channels==4.0.0
+daphne==4.0.0
+
+# SQL 처리 및 DB 연동
+sqlparse==0.5.3
+psycopg2-binary==2.9.9               # PostgreSQL용 드라이버
+dj-database-url                      # DATABASE_URL 파서
+
+# 이미지 처리
+Pillow==10.2.0
+
+# 배포 서버
+gunicorn==21.2.0
+
+# 개발 및 디버깅 도구 (선택 사항)
+django-debug-toolbar                 # 개발용 툴바
+pytest                               # 테스트 도구
+pytest-django                        # Django 테스트 플러그인
+
+# 관리자 테마 (선택 사용)
+django-jazzmin>=2.6.0
+# django-unfold>=0.20.0              # jazzmin과 병행 사용 지양
