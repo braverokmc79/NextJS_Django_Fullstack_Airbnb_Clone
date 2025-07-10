@@ -5,6 +5,16 @@
   --foreground: #171717;
 }
 
+/* 👇 직접 클래스 선언해서 적용 */
+.bg-airbnb {
+  background-color: #ff385c;
+}
+
+.hover\:bg-airbnb-dark:hover {
+  background-color: #d50027;
+}
+
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

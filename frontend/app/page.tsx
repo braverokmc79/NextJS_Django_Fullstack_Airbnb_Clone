@@ -1,14 +1,17 @@
+import Categories from "./components/Categories";
+import PropertyList from "./components/properties/PropertyList";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen items-center justify-center bg-gray-100">
-      <h1 className="text-4xl font-bold text-blue-500">Tailwind 4.1 + Next.js 15 시작!</h1>
-    
-      <div className="bg-airbnb airbnb  p-6">
-          Airbnb 스타일 배경입니다
-    </div>
+    <main className="max-w-[1500px] mx-auto px-6 py-10">
+       <Categories />
 
-    
+      <div className="mt-4 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+        <PropertyList />        
+      </div>
+
+
     </main> 
   );
+
 }
