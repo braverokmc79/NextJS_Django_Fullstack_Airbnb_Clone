@@ -124,6 +124,7 @@ docker-compose.override.yml
 
 
 /script
+ai.txt
 
 
 
