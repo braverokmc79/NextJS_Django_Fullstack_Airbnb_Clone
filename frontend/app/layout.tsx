@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Noto_Sans_KR } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/navbar/Navbar";
+import LoginModal from "./components/modals/LoginModal";
+import SignupModal from "./components/modals/SignupModal";
 
 
 const NotoSan = Noto_Sans_KR({subsets: ["latin"]});
@@ -19,15 +21,26 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+
+  const content=<>yo</>;
+  
   return (
     <html lang="ko">
       <body className={NotoSan.className}>      
         <Navbar />
 
+        <div className="pt-32">
+            {children}
+        </div>
 
-      <div className="pt-24">
-          {children}
-      </div>
+
+   
+       <LoginModal />
+ 
+       <SignupModal />
+
+
 
       </body>
     </html>

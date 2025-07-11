@@ -10,6 +10,10 @@
   background-color: #ff385c;
 }
 
+.text-airbnb-dark{
+  color: #d50027;
+}
+
 .hover\:bg-airbnb-dark:hover {
   background-color: #d50027;
 }
