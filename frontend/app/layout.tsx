@@ -34,13 +34,9 @@ export default function RootLayout({
             {children}
         </div>
 
-
-   
        <LoginModal />
  
        <SignupModal />
-
-
 
       </body>
     </html>
