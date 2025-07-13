@@ -35,7 +35,12 @@ media/
 staticfiles/
 static_root/
 .env
-.env.*
+.env.prod
+#.env.*
+
+
+
+
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
