@@ -3,7 +3,9 @@ from datetime import timedelta
 from pathlib import Path
 from dotenv import load_dotenv
 
+
 BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 # 1. 기본적으로 .env 로드 (여기서 ENV 값만 읽는다)
 load_dotenv(dotenv_path=BASE_DIR / ".env")
@@ -14,6 +16,10 @@ if ENV == "prod":
     load_dotenv(dotenv_path=BASE_DIR / ".env.prod", override=True)
 else:
     load_dotenv(dotenv_path=BASE_DIR / ".env.dev", override=True)
+    
+
+ 
+
 
 SECRET_KEY = os.environ.get("SECRET_KEY", "insecure-default-key")
 DEBUG = os.environ.get("DEBUG", "0") == "1"
@@ -85,7 +91,7 @@ INSTALLED_APPS = [
 
     'corsheaders',
 
-    # 'chat',
+    #'chat',
     'property',
     'useraccount',
 ]
@@ -101,7 +107,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'djangobnb_backend.urls'
+
+
+
+
 
 TEMPLATES = [
     {
@@ -119,8 +128,11 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'djangobnb_backend.wsgi.application'
-ASGI_APPLICATION = 'djangobnb_backend.asgi.application'
+
+WSGI_APPLICATION = 'config.wsgi.application' 
+ASGI_APPLICATION = 'config.asgi.application'
+ROOT_URLCONF = 'config.urls'
+
 
 DATABASES = {
     'default': {
