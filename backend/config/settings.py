@@ -18,6 +18,8 @@ DEBUG = bool(os.environ.get('DEBUG', default=0))
 ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS').split(",")
 
 
+AUTH_USER_MODEL = 'useraccount.User'
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -27,7 +29,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'useraccount'    
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -94,9 +98,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ko-kr'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
