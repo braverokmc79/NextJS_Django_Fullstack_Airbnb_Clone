@@ -123,7 +123,7 @@ docker-compose up --build
 ```
 
 ### 2. 백엔드 가상환경으로   실행
-.env ~ 환경파일을 정보를 도커가 아닌 운영 DB변경
+.env ~ 환경파일을 정보를 도커가 아닌 운영 DB변경시 가능
 ```
  python .\manage.py runserver
 ```

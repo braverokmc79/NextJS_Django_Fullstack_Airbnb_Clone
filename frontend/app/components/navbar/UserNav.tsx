@@ -3,6 +3,7 @@ import {useState} from "react";
 import MenuLink from "./MenuLink";
 import userLoginModal from "@/app/hooks/useLoginModal";
 import useSignupModal from "@/app/hooks/useSignupModal";
+import LogoutButton from "../LogoutButton";
 
 
 const UserNav=()=>{
@@ -46,6 +47,8 @@ const UserNav=()=>{
                              
                         }}
                     />
+
+                     <LogoutButton />
                 </div>
                
             )}
