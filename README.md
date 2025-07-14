@@ -110,6 +110,32 @@ nextjs-django-airbnb/
 └── README.md
 ```
 
+
+## 🚀 개발환경 실행
+
+### 1. 백엔드 도커로  실행
+.env, .env.dev, .env.prod 작성후
+```
+cd backend
+docker-compose build --no-cache
+docker-compose up --build
+
+```
+
+### 2. 백엔드 가상환경으로   실행
+.env ~ 환경파일을 정보를 도커가 아닌 운영 DB변경
+```
+ python .\manage.py runserver
+```
+
+### 3.  프론트엔드 NextJS   실행
+```
+cd frontend
+pnpm install
+pnpm run dev
+```
+
+
 ---
 
 ## 🚀 배포 방식
@@ -120,7 +146,7 @@ nextjs-django-airbnb/
 
 ---
 
-## 👨‍💻 만든 이유
+## 👨‍💻 만든이
 
 - 편저 : [코담](https://codam.kr)
 ---
