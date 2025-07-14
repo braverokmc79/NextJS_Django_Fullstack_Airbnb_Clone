@@ -55,12 +55,34 @@ docker-compose up -d
 
 ## 🛠 자주 사용하는 명령어
 
-| 명령어                      | 설명                  |
-| ------------------------ | ------------------- |
-| `docker-compose down`    | 실행 중인 컨테이너를 중지하고 제거 |
-| `docker-compose ps`      | 실행 중인 컨테이너 목록 확인    |
-| `docker-compose logs`    | 전체 서비스 로그 확인        |
-| `docker-compose logs -f` | 실시간 로그 스트리밍 보기      |
+| 명령어                         | 설명                     |
+| --------------------------- | ---------------------- |
+| `docker-compose down`       | 실행 중인 컨테이너를 중지하고 제거    |
+| `docker-compose ps`         | 실행 중인 컨테이너 목록 확인       |
+| `docker-compose logs`       | 전체 서비스 로그 확인           |
+| `docker-compose logs -f`    | 실시간 로그 스트리밍 보기         |
+| `docker-compose build`      | Dockerfile 기반 이미지 빌드   |
+| `docker-compose up --build` | 캐시 무시하고 강제로 새로 빌드 후 실행 |
+| `docker-compose stop`       | 컨테이너 정지                |
+| `docker-compose restart`    | 컨테이너 재시작               |
+
+---
+
+## 🧹 캐시 삭제 후 강제 빌드
+
+이미지가 캐시에 남아 문제가 발생할 경우 아래 명령어로 **강제 빌드**할 수 있습니다:
+
+```bash
+docker-compose down --volumes --remove-orphans
+docker-compose build --no-cache
+docker-compose up -d
+```
+
+설명:
+
+* `--volumes` : 연결된 볼륨도 삭제 (주의!)
+* `--remove-orphans` : `yml`에서 제거된 컨테이너도 삭제
+* `--no-cache` : Dockerfile 캐시 무시하고 강제로 새 빌드
 
 ---
 
@@ -69,10 +91,9 @@ docker-compose up -d
 * `docker-compose.yml`은 현재 디렉토리에 있어야 인식됩니다.
 * `-f` 옵션을 통해 다른 파일 지정도 가능합니다:
 
-  ```bash
-  docker-compose -f custom-compose.yml up -d
-  ```
-* `up --build`을 사용하면 기존 이미지 대신 강제로 새로 빌드할 수 있습니다.
+```bash
+docker-compose -f custom-compose.yml up -d
+```
 
 ---
 

@@ -131,6 +131,9 @@ docker-compose.override.yml
 /script
 ai.txt
 
+/python-test-data/*
+
+
 
 #/documents/
 

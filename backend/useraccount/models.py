@@ -14,7 +14,6 @@ class CustomUserManager(UserManager):
         user = self.model(email=email, name=name, **extra_fields)
         user.set_password(password)
         user.save(using=self.db)
-
         return user
 
     def create_user(self, name=None, email=None, password=None, **extra_fields):
@@ -29,26 +28,29 @@ class CustomUserManager(UserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    email = models.EmailField(unique=True)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    avatar = models.ImageField(upload_to='uploads/avatars')
+    id           = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, verbose_name="ID")
+    email        = models.EmailField(unique=True, verbose_name="이메일")
+    name         = models.CharField(max_length=255, blank=True, null=True, verbose_name="이름")
+    avatar       = models.ImageField(upload_to='uploads/avatars', verbose_name="프로필 이미지")
 
-    is_active = models.BooleanField(default=True)
-    is_superuser = models.BooleanField(default=False)
-    is_staff = models.BooleanField(default=False)
+    is_active    = models.BooleanField(default=True, verbose_name="활성 사용자 여부")
+    is_superuser = models.BooleanField(default=False, verbose_name="슈퍼유저 여부")
+    is_staff     = models.BooleanField(default=False, verbose_name="스태프 권한 여부")
 
-    date_joined = models.DateTimeField(auto_now_add=True)
-    last_login = models.DateTimeField(blank=True, null=True)
+    date_joined  = models.DateTimeField(auto_now_add=True, verbose_name="가입일")
+    last_login   = models.DateTimeField(blank=True, null=True, verbose_name="마지막 로그인")
 
     objects = CustomUserManager()
 
-    USERNAME_FIELD = 'email'
-    EMAIL_FIELD = 'email'
+    USERNAME_FIELD  = 'email'
+    EMAIL_FIELD     = 'email'
     REQUIRED_FIELDS = ['name',]
 
     def avatar_url(self):
         if self.avatar:
             return f'{settings.WEBSITE_URL}{self.avatar.url}'
-        else:
-            return ''
+        return ''
+
+    class Meta:
+        verbose_name = "사용자"
+        verbose_name_plural = "사용자 목록"
