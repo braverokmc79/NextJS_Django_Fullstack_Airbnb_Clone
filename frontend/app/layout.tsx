@@ -6,6 +6,7 @@ import LoginModal from "./components/modals/LoginModal";
 import SignupModal from "./components/modals/SignupModal";
 
 
+
 const NotoSan = Noto_Sans_KR({subsets: ["latin"]});
 
 

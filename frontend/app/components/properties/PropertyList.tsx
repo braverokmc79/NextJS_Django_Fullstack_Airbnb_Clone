@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import PropertyListItem from "./PropertyListItem";
+import apiService from "@/app/services/apiService";
 
 export type PropertyType = {
   id: string;
@@ -13,23 +14,13 @@ export type PropertyType = {
 const PropertyList = () => {
   const [properties, setProperties] = useState<PropertyType[]>([]);
 
-  const getProperties = async () => {
-    const url = "http://localhost:8000/api/properties/";
-    const response = await fetch(url);
-    const responseData = await response.json();
-
-    if (!response.ok) {
-      setProperties([]);
-      return;
-    }
-    console.log("        =====>" ,responseData.data);
-    setProperties(responseData.data);
-  };
-
   useEffect(() => {
-    getProperties();
-  }, []);
+    const properties = apiService.get("/api/properties/");
+    properties.then((response) => {
+      setProperties(response.data);
+    });
 
+  }, []);  
 
   return (
     <>

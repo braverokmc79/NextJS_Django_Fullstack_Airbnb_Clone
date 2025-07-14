@@ -1,8 +1,8 @@
 "use client";
 import {useState} from "react";
 import MenuLink from "./MenuLink";
-import userLoginModal from "../hooks/useLoginModal";
-import useSignupModal from "../hooks/useSignupModal";
+import userLoginModal from "@/app/hooks/useLoginModal";
+import useSignupModal from "@/app/hooks/useSignupModal";
 
 
 const UserNav=()=>{

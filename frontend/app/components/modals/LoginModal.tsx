@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
 import Modal from "./Modal";
-import userLoginModal from "../hooks/useLoginModal";
 import CustomButton from "../forms/CustomButton";
+import userLoginModal from "@/app/hooks/useLoginModal";
 
 const LoginModal: React.FC = () => {
   const LoginModal = userLoginModal();
