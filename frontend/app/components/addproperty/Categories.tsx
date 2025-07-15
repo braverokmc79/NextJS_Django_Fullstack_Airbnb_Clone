@@ -1,59 +1,54 @@
-
-import { HomeModernIcon, SunIcon, BuildingLibraryIcon, CubeIcon } from '@heroicons/react/24/outline';
-
+import {
+  HomeModernIcon,
+  SunIcon,
+  BuildingLibraryIcon,
+  CubeIcon
+} from '@heroicons/react/24/outline';
 
 interface CategoriesProps {
-    dataCategory: string;
-    setCategory: (category: string) => void;
+  dataCategory: string;
+  setCategory: (category: string) => void;
 }
 
-
 const Categories: React.FC<CategoriesProps> = ({ dataCategory, setCategory }) => {
+  const baseStyle =
+    "pb-4 flex flex-col items-center space-y-2 border-5 p-4 opacity-60 hover:border-gray-600 hover:opacity-100";
 
-
-    return(
-        <>
-      <div className="pt-3 cursor-pointer pb-6 flex items-center space-x-12">
-      
+  return (
+    <div className="pt-3 pb-6 flex items-center space-x-12 cursor-pointer">
       <div
         onClick={() => setCategory('beach')}
-        className={`pb-4 flex flex-col items-center space-y-2 border-b-2 
-         ${dataCategory == 'Beach' ? 'border-gray-800' : 'border-white'}
-        border-white    opacity-60 hover:border-gray-200 hover:opacity-100`}>
-        
+        className={`${baseStyle} ${dataCategory === 'beach' ? 'border-red-800' : 'border-white'}`}
+      >
         <HomeModernIcon className="w-5 h-5" />
         <span className="text-xs">전체</span>
       </div>
 
-      <div 
-       onClick={() => setCategory('villas')}
-      className={`pb-4 flex flex-col items-center space-y-2 border-b-2 border-white 
-           ${dataCategory == 'Villas' ? 'border-gray-800' : 'border-white'}
-          opacity-60 hover:border-gray-200 hover:opacity-100`}>
+      <div
+        onClick={() => setCategory('villas')}
+        className={`${baseStyle} ${dataCategory === 'villas' ? 'border-red-800' : 'border-white'}`}
+      >
         <SunIcon className="w-5 h-5" />
         <span className="text-xs">해변</span>
       </div>
 
-      <div 
-       onClick={() => setCategory('cabins')}
-       className={`pb-4 flex flex-col items-center space-y-2 border-b-2 border-white 
-          opacity-60 hover:border-gray-200 hover:opacity-100`}>
+      <div
+        onClick={() => setCategory('cabins')}
+        className={`${baseStyle} ${dataCategory === 'cabins' ? 'border-red-800' : 'border-white'}`}
+      >
         <BuildingLibraryIcon className="w-5 h-5" />
         <span className="text-xs">통나무집</span>
       </div>
 
-      <div 
-       onClick={() => setCategory('tiny_homes')}
-        className={`b-4 flex flex-col items-center space-y-2 border-b-2 border-white 
-          opacity-60 hover:border-gray-200 hover:opacity-100`}>
+      <div
+        onClick={() => setCategory('tiny_homes')}
+        className={`${baseStyle} ${dataCategory === 'tiny_homes' ? 'border-red-800' : 'border-white'}`}
+      >
         <CubeIcon className="w-5 h-5" />
         <span className="text-xs">작은 집</span>
       </div>
-
     </div>
-        </>
-    );
-
-}
+  );
+};
 
 export default Categories;
