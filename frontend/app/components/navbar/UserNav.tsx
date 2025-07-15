@@ -6,7 +6,12 @@ import useSignupModal from "@/app/hooks/useSignupModal";
 import LogoutButton from "../LogoutButton";
 
 
-const UserNav=()=>{
+interface UserNavProps{
+    userId?:string | null;
+}
+
+const UserNav:React.FC<UserNavProps>=({userId})=>{
+
     const loginModal = userLoginModal();
     const signupModal = useSignupModal();
     const [isOpen, setIsOpen] = useState(false);
@@ -30,34 +35,36 @@ const UserNav=()=>{
             {isOpen && (
                 <div className="w-[220px] absolute top-[60px] right-0 bg-white border 
                         rounded-xl shadow-md flex flex-col border-gray-300">
-                    <MenuLink
-                        label="로그인"
-                        onClick={() => {
-                            console.log("login clicked")
-                            loginModal.onOpen();
-                            
-                         } }
-                    />
+                    {userId ? (
+                        <LogoutButton />
+                    ) : 
+                          (
+                             <>
+                                    <MenuLink
+                                        label="로그인"
+                                        onClick={() => {
+                                            console.log("login clicked")
+                                            loginModal.onOpen();
+                                            
+                                        } }
+                                    />
 
-                    <MenuLink
-                        label="회원가입"
-                        onClick={() => 
-                            {console.log("signup clicked")
-                            signupModal.onOpen()
-                             
-                        }}
-                    />
-
-                     <LogoutButton />
+                                    <MenuLink
+                                        label="회원가입"
+                                        onClick={() => 
+                                            {console.log("signup clicked")
+                                            signupModal.onOpen()
+                                            
+                                        }}
+                                    />
+                              </>   
+                        )      
+                    }
+                     
                 </div>
                
             )}
-
-
-
         </div>
     )
 }
-
-
 export default UserNav;

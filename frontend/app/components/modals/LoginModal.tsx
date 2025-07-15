@@ -44,8 +44,9 @@ const LoginModal: React.FC = () => {
         >
         <input
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="이메일 입력"
+          placeholder="이메일 입력"          
           type="email"
+          required
           className="w-full h-[54px] px-4 border border-gray-300 rounded-xl"
         />
 
@@ -57,7 +58,7 @@ const LoginModal: React.FC = () => {
         />
 
        
-        {errors.map((error, index) => {
+        {errors&& errors.map((error, index) => {
             return (
                 <div 
                     key={`error_${index}`}
@@ -67,7 +68,7 @@ const LoginModal: React.FC = () => {
                 </div>
             )
         })}
-        <CustomButton label="로그인 하기" onClick={submitLogin} />
+        <CustomButton label="로그인 하기"  />
       </form>
     </>
   );
