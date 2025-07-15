@@ -1,7 +1,7 @@
 "use client";
 import {useState} from "react";
 import MenuLink from "./MenuLink";
-import userLoginModal from "@/app/hooks/useLoginModal";
+import useLoginModal from "@/app/hooks/useLoginModal";
 import useSignupModal from "@/app/hooks/useSignupModal";
 import LogoutButton from "../LogoutButton";
 
@@ -12,7 +12,7 @@ interface UserNavProps{
 
 const UserNav:React.FC<UserNavProps>=({userId})=>{
 
-    const loginModal = userLoginModal();
+    const loginModal = useLoginModal();
     const signupModal = useSignupModal();
     const [isOpen, setIsOpen] = useState(false);
 
@@ -44,7 +44,7 @@ const UserNav:React.FC<UserNavProps>=({userId})=>{
                                         label="로그인"
                                         onClick={() => {
                                             console.log("login clicked")
-                                            loginModal.onOpen();
+                                            loginModal.open();
                                             
                                         } }
                                     />
@@ -53,7 +53,7 @@ const UserNav:React.FC<UserNavProps>=({userId})=>{
                                         label="회원가입"
                                         onClick={() => 
                                             {console.log("signup clicked")
-                                            signupModal.onOpen()
+                                            signupModal.open()
                                             
                                         }}
                                     />

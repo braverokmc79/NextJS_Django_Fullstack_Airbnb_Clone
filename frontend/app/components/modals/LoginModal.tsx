@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Modal from "./Modal";
 import CustomButton from "../forms/CustomButton";
-import userLoginModal from "@/app/hooks/useLoginModal";
+import useLoginModal from "@/app/hooks/useLoginModal";
 import apiService from "@/app/services/apiService";
 import { useRouter } from "next/navigation";
 import { handleLogin } from "@/app/lib/actions";
@@ -11,7 +11,7 @@ import { handleLogin } from "@/app/lib/actions";
 
 const LoginModal: React.FC = () => {
   const router = useRouter();
-  const LoginModal = userLoginModal();
+  const LoginModal = useLoginModal();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<string[]>([]);
@@ -27,10 +27,8 @@ const LoginModal: React.FC = () => {
       if (response.access) {
         handleLogin(response.user.pk, response.access, response.refresh);
         
-        LoginModal.close();
-        
+        LoginModal.close();        
         router.push("/");
-
       } else {
          setErrors(response.non_field_errors);
       }
