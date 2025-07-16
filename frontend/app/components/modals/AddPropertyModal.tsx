@@ -5,6 +5,7 @@ import Modal from './Modal';
 import useAddPropertyModal from '@/app/hooks/useAddPropertyModal';
 import CustomButton from '../forms/CustomButton';
 import Categories from '../addproperty/Categories';
+import SelectCountry, { SelectCountryValue } from '../forms/SelectCountry';
 
 
 const AddPropertyModal: React.FC = () => {
@@ -18,8 +19,7 @@ const AddPropertyModal: React.FC = () => {
   const [dataBathrooms, setDataBathrooms] = useState('');
   const [dataGuests, setDataGuests] = useState('');
 
-
-
+  const [dataCountry, setDataCountry] = useState<SelectCountryValue>();
 
   const addPropertyModal = useAddPropertyModal();
 
@@ -160,7 +160,25 @@ const AddPropertyModal: React.FC = () => {
       ) : currentStep === 4 ?
        (
         <>
+              <h2 className='mb-6 text-2xl'>위치</h2>
 
+              <div className='pt-3 pb-6 space-y-4'>
+                  <SelectCountry 
+                      value={dataCountry}
+                      onChange={(value) => setDataCountry(value as SelectCountryValue)}
+                  />
+              </div>
+
+              <CustomButton
+                  label='이전'
+                  className="mb-2 !bg-black hover:!bg-gray-800"
+                  onClick={() => setCurrentStep(3)}
+              />
+
+              <CustomButton
+                  label='다음'
+                  onClick={() => setCurrentStep(5)}
+              />
         </>
       ) : null}
 

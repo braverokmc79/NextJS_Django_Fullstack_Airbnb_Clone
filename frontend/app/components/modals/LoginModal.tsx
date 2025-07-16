@@ -22,7 +22,10 @@ const LoginModal: React.FC = () => {
         password: password
       };
       
+      console.log('로그인 응답', formData);
       const response = await apiService.post("/api/auth/login/", JSON.stringify(formData));
+
+      console.log('로그인 응답 response', response);
 
       if (response.access) {
         handleLogin(response.user.pk, response.access, response.refresh);
@@ -66,7 +69,7 @@ const LoginModal: React.FC = () => {
                 </div>
             )
         })}
-        <CustomButton label="로그인 하기"  />
+        <CustomButton type="submit" label="로그인 하기"  />
       </form>
     </>
   );

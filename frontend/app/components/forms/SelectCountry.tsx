@@ -35,8 +35,3 @@ const SelectCountry: React.FC<SelectCountryProps> = ({
 
 export default SelectCountry;
 
-
-//설치
-//pnpm install react-select
-
-//pnpm install world-countries
