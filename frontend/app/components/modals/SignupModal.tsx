@@ -31,6 +31,7 @@ const SignupModal: React.FC = () => {
       if (response.access) {
         signupModal.close();
         router.push("/");
+        router.refresh();
       } else {
         const tempErrors: string[] = Object.values(response).flatMap((err: any) => err);
         setErrors(tempErrors);

@@ -36,7 +36,7 @@ const UserNav:React.FC<UserNavProps>=({userId})=>{
                 <div className="w-[220px] absolute top-[60px] right-0 bg-white border 
                         rounded-xl shadow-md flex flex-col border-gray-300">
                     {userId ? (
-                        <LogoutButton />
+                        <LogoutButton setIsOpen={setIsOpen} />
                     ) : 
                           (
                              <>
@@ -45,7 +45,7 @@ const UserNav:React.FC<UserNavProps>=({userId})=>{
                                         onClick={() => {
                                             console.log("login clicked")
                                             loginModal.open();
-                                            
+                                            setIsOpen(false);
                                         } }
                                     />
 
@@ -54,7 +54,7 @@ const UserNav:React.FC<UserNavProps>=({userId})=>{
                                         onClick={() => 
                                             {console.log("signup clicked")
                                             signupModal.open()
-                                            
+                                            setIsOpen(false);
                                         }}
                                     />
                               </>   

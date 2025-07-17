@@ -4,13 +4,18 @@ import { useRouter } from "next/navigation";
 import MenuLink from "./navbar/MenuLink";
 import { resetAuthCookies } from "../lib/actions";
 
+interface LogoutButtonProps{
+  setIsOpen: (isOpen: boolean) => void;
+}
 
-const LogoutButton: React.FC = () => {
+const LogoutButton: React.FC<LogoutButtonProps> = ({setIsOpen}) => {
   const router = useRouter();
 
   const submitLogout = async () => {
     resetAuthCookies();
-    router.push("/");
+    setIsOpen(false);
+    router.refresh();
+    router.push("/");    
   };
 
   return <MenuLink label="로그아웃" onClick={submitLogout} />;

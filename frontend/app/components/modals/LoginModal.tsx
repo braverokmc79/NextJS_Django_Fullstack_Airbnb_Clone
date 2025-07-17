@@ -32,6 +32,7 @@ const LoginModal: React.FC = () => {
         
         LoginModal.close();        
         router.push("/");
+        router.refresh();
       } else {
          setErrors(response.non_field_errors);
       }
