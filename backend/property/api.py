@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from .models import Property
-from .serializers import PropertiesListSerializer
+from .serializers import PropertiesDetailSerializer, PropertiesListSerializer
 from .forms import PropertyForm
 
 
@@ -10,7 +10,6 @@ from .forms import PropertyForm
 @authentication_classes([])
 @permission_classes([])
 def properties_list(request):
-
     properties = Property.objects.all()
     serializer=PropertiesListSerializer(properties, many=True)
     
@@ -19,6 +18,18 @@ def properties_list(request):
     })
     
 
+#상세조회
+@api_view(['GET'])
+@authentication_classes([])
+@permission_classes([])
+def property_detail(request, pk):
+    property = Property.objects.get(pk=pk)    
+    serializer=PropertiesDetailSerializer(property, many=False)
+    return JsonResponse(serializer.data)
+
+
+
+#파일 업로드
 @api_view(['POST', 'FILE'])
 def create_property(request):
     form = PropertyForm(request.POST, request.FILES)    
