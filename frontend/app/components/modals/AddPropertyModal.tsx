@@ -6,10 +6,16 @@ import useAddPropertyModal from '@/app/hooks/useAddPropertyModal';
 import CustomButton from '../forms/CustomButton';
 import Categories from '../addproperty/Categories';
 import SelectCountry, { SelectCountryValue } from '../forms/SelectCountry';
+import Image from 'next/image';
+import apiService from '@/app/services/apiService';
+import { useRouter } from 'next/navigation';
 
 
 const AddPropertyModal: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(1);
+  const [errors, setErrors] = useState<string[]>([]);
+
+
   const [dataCategory, setDataCategory] = useState('');
   const [dataTitle, setDataTitle] = useState('');  
   const [dataDescription, setDataDescription] = useState('');
@@ -18,16 +24,64 @@ const AddPropertyModal: React.FC = () => {
   const [dataBedrooms, setDataBedrooms] = useState('');
   const [dataBathrooms, setDataBathrooms] = useState('');
   const [dataGuests, setDataGuests] = useState('');
-
   const [dataCountry, setDataCountry] = useState<SelectCountryValue>();
+  const [dataImage, setDataImage] = useState<File | null>(null);
+
 
   const addPropertyModal = useAddPropertyModal();
-
+  const router = useRouter();
 
   // 카테고리 설정 함수
   const setCategory = (category: string) => {
     setDataCategory(category);
   };
+
+  //이미지 설정
+  const setImage =(event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files.length > 0) {
+       const tmpImage = event.target.files[0];
+      
+        setDataImage(tmpImage);
+    }
+  }
+
+
+  const submitForm = async () => {
+    console.log("submitForm");
+    if(!dataCategory||!dataTitle||!dataDescription||!dataPrice||!dataCountry||!dataImage){
+        return
+    } 
+
+    const formData = new FormData();
+    formData.append('category', dataCategory);
+    formData.append('title', dataTitle);
+    formData.append('description', dataDescription);
+    formData.append('price_per_night', dataPrice);
+    formData.append('bedrooms', dataBedrooms);
+    formData.append('bathrooms', dataBathrooms);
+    formData.append('guests', dataGuests);
+    formData.append('country', dataCountry.label);
+    formData.append('country_code', dataCountry.value);
+    formData.append('image', dataImage);
+
+    const response = await apiService.fileUpload('/api/properties/create/', formData);
+
+    if (response.success) {
+        console.log('SUCCESS :-D');
+
+        router.push('/?added=true');
+
+        addPropertyModal.close();
+    } else {
+        console.log('Error');
+
+        const tmpErrors: string[] = Object.values(response).map((error: any) => {
+            return error;
+        })
+
+        setErrors(tmpErrors)
+    }
+  }
 
   // 모달 내용 구성
   const content = (
@@ -180,7 +234,68 @@ const AddPropertyModal: React.FC = () => {
                   onClick={() => setCurrentStep(5)}
               />
         </>
-      ) : null}
+      ) : 
+      
+
+       (
+                <>
+                <form onSubmit={
+                  (e) =>{
+                    console.log('submitForm111');
+                    e.preventDefault();
+                  
+                    submitForm();
+                  } 
+                }>
+                    <h2 className='mb-6 text-2xl'>이미지</h2>
+
+                    <div className='pt-3 pb-6 space-y-4'>
+                        <div className='py-4 px-6 bg-gray-600 text-white rounded-xl'>
+                            <input
+                                type="file"
+                                accept='image/*'
+                                onChange={setImage}
+                                required
+                            />
+                        </div>
+
+                        {dataImage && (
+                            <div className='w-[200px] h-[150px] relative'>
+                                <Image                                  
+                                    fill
+                                    alt="Uploaded image"
+                                    src={URL.createObjectURL(dataImage)}
+                                    className='w-full h-full object-cover rounded-xl'
+                                />
+                            </div>
+                        )}
+                    </div>
+
+                    {errors.map((error, index) => {
+                        return (
+                            <div
+                                key={index}
+                                className='p-5 mb-4 bg-airbnb text-white rounded-xl opacity-80'
+                            >
+                                {error}
+                            </div>
+                        )
+                    })}
+
+                    <CustomButton
+                        label='이전'
+                        className='mb-2 !bg-black hover:!bg-gray-800'
+                        onClick={() => setCurrentStep(4)}
+                    />
+
+                    <CustomButton
+                        label='숙박등록하기'
+                        type='submit'
+                    />
+                  </form>
+                </>
+           )
+      }
 
       
      </>

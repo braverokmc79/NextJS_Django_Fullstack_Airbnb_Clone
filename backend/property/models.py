@@ -16,6 +16,8 @@ class Property(models.Model):
     country_code    = models.CharField(max_length=10,        verbose_name="국가 코드")
     category        = models.CharField(max_length=255,       verbose_name="숙소 유형")
     favorited       = models.ManyToManyField(User, related_name='favorites', blank=True, verbose_name="찜한 사용자")
+   
+   
     image           = models.ImageField(upload_to='uploads/properties', verbose_name="대표 이미지")
     landlord        = models.ForeignKey(User, related_name='properties', on_delete=models.CASCADE, verbose_name="호스트")
     created_at      = models.DateTimeField(auto_now_add=True, verbose_name="등록일")

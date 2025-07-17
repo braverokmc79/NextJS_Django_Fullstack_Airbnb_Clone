@@ -23,7 +23,7 @@ const LoginModal: React.FC = () => {
       };
       
       console.log('로그인 응답', formData);
-      const response = await apiService.post("/api/auth/login/", JSON.stringify(formData));
+      const response = await apiService.postWithoutToken("/api/auth/login/", JSON.stringify(formData));
 
       console.log('로그인 응답 response', response);
 
