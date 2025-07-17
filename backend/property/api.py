@@ -51,11 +51,12 @@ def create_property(request):
 @api_view(['POST'])
 def book_property(request, pk):
     try:
-        start_date = request.POST.get('start_date', '')
-        end_date = request.POST.get('end_date', '')
-        number_of_nights = request.POST.get('number_of_nights', '')
-        total_price = request.POST.get('total_price', '')
-        guests = request.POST.get('guests', '')
+        print('🎈 예약하기 ', request.data)
+        start_date = request.data.get('start_date', '')
+        end_date = request.data.get('end_date', '')
+        number_of_nights = request.data.get('number_of_nights', '')
+        total_price = request.data.get('total_price', '')
+        guests = request.data.get('guests', '')
 
         property = Property.objects.get(pk=pk)
         
@@ -71,7 +72,7 @@ def book_property(request, pk):
         
         return JsonResponse({"success":True})
     except Exception as e:
-        print('Error', e)      
+        print('🤬Error', e)      
         
         return JsonResponse({"success":False})
       

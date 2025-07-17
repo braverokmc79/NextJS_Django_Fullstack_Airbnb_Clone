@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { differenceInDays, eachDayOfInterval, format} from 'date-fns';
 import apiService from '@/app/services/apiService';
 import useLoginModal from '@/app/hooks/useLoginModal';
+import DatePicker from '../forms/Calendar';
 
 const initialDateRange = {
   startDate: new Date(),
@@ -34,11 +35,55 @@ const ReservationSidebar: React.FC<ReservationSidebarProps> = ({userId,property}
   const [totalPrice, setTotalPrice]=useState<number>(0);
   const [dateRange, setDateRange] = useState(initialDateRange);
   const [minDate, setMinDate] = useState<Date>(new Date());
+  const [bookedDates, setBookedDates] = useState<Date[]>([]);
   const [guests, setGuests] = useState<string>('1');
   const guestsRange = Array.from({ length: property.guests }, (_, index) => index + 1)
 
+  const performBooking=async()=>{
+    console.log("✅ performBooking ", userId);
 
 
+    if(userId){      
+
+
+      if(dateRange.startDate&& dateRange.endDate){
+         const payload = {
+          guests,
+          start_date: format(dateRange.startDate, 'yyyy-MM-dd'),
+          end_date: format(dateRange.endDate, 'yyyy-MM-dd'),
+          number_of_nights: nights,
+          total_price: totalPrice,
+        };
+    
+        const response=await apiService.post(`/api/properties/${property.id}/book/`, JSON.stringify(payload));
+
+        if(response.success){
+            console.log("Bookin successful");
+        }else{
+            console.log('Something went wrong ...');
+        }
+      }      
+    }else{
+      loginModal.open();
+    }
+  }
+
+
+
+  const _setDateRange = (selection: any) => {
+        const newStartDate = new Date(selection.startDate);
+        const newEndDate = new Date(selection.endDate);
+
+        if (newEndDate <= newStartDate) {
+            newEndDate.setDate(newStartDate.getDate() + 1);
+        }
+
+        setDateRange({
+            ...dateRange,
+            startDate: newStartDate,
+            endDate: newEndDate
+        })
+    }
     useEffect(() => {
      
         if (dateRange.startDate && dateRange.endDate) {
@@ -69,6 +114,13 @@ const ReservationSidebar: React.FC<ReservationSidebarProps> = ({userId,property}
     <aside className="mt-6 p-6 col-span-2 rounded-xl border border-gray-300 shadow-xl">
       <h2 className="mb-5 text-2xl"> {property.price_per_night.toLocaleString()}  / 1박 요금</h2>
 
+        <DatePicker
+              value={dateRange}
+              bookedDates={bookedDates}
+              onChange={(value) => _setDateRange(value.selection)}
+          />
+
+
       <div className="mb-6 p-3 border border-gray-400 rounded-xl">
         <label className="mb-2 block font-bold text-xs">인원</label>
         <select 
@@ -81,7 +133,9 @@ const ReservationSidebar: React.FC<ReservationSidebarProps> = ({userId,property}
         </select>
       </div>
 
-      <div className="w-full mb-6 py-6 text-center text-white bg-airbnb hover:bg-airbnb-dark rounded-xl cursor-pointer">
+      <div 
+      onClick={performBooking}
+      className="w-full mb-6 py-6 text-center text-white bg-airbnb hover:bg-airbnb-dark rounded-xl cursor-pointer">
         예약하기
       </div>
 
