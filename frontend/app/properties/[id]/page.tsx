@@ -1,4 +1,5 @@
 import ReservationSidebar from '@/app/components/properties/ReservationSidebar';
+import { getUserId } from '@/app/lib/actions';
 import apiService from '@/app/services/apiService';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -11,6 +12,7 @@ interface PropertyDetailPageProps {
 const PropertyDetailPage:React.FC<PropertyDetailPageProps> = async({params}) => {
   const {id} = await params;  
   const property = await apiService.get(`/api/properties/${id}`);
+  const userId = await getUserId();
 
  
 
@@ -60,7 +62,8 @@ const PropertyDetailPage:React.FC<PropertyDetailPageProps> = async({params}) => 
                 </div>
 
                 <ReservationSidebar 
-                   
+                    property={property}
+                    userId={userId}
                 />
             </div>
         </main>

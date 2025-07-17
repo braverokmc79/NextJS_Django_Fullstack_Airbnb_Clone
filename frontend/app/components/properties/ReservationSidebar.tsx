@@ -1,25 +1,83 @@
+"use client";
 import React from 'react';
+import { useState, useEffect } from 'react';
+import { differenceInDays, eachDayOfInterval, format} from 'date-fns';
+import apiService from '@/app/services/apiService';
+import useLoginModal from '@/app/hooks/useLoginModal';
 
-const ReservationSidebar: React.FC = () => {
-  // 임의 값 설정
-  const nights = 3;
-  const price_per_night = 120000; // 1박당 12만 원
-  const fee = 15000;
-  const totalPrice = price_per_night * nights + fee;
+const initialDateRange = {
+  startDate: new Date(),
+  endDate: new Date(),
+  key: 'selection',
+};
+
+
+export type Property={
+  id:string;
+  title:string;
+  guests: number;
+  price_per_night:number;
+  image_url:string;
+}
+
+interface ReservationSidebarProps {
+  userId :string | null,
+  property: Property
+}
+
+const ReservationSidebar: React.FC<ReservationSidebarProps> = ({userId,property}) => {
+
+  const loginModal =useLoginModal();
+
+  const [fee, setFee]=useState<number>(0);  
+  const [nights, setNights]=useState<number>(0);
+  const [totalPrice, setTotalPrice]=useState<number>(0);
+  const [dateRange, setDateRange] = useState(initialDateRange);
+  const [minDate, setMinDate] = useState<Date>(new Date());
+  const [guests, setGuests] = useState<string>('1');
+  const guestsRange = Array.from({ length: property.guests }, (_, index) => index + 1)
+
+
+
+    useEffect(() => {
+     
+        if (dateRange.startDate && dateRange.endDate) {
+            const dayCount = differenceInDays(
+                dateRange.endDate,
+                dateRange.startDate
+            );
+
+            if (dayCount && property.price_per_night) {
+                const _fee = ((dayCount * property.price_per_night) / 100) * 5;
+
+                setFee(_fee);
+                setTotalPrice((dayCount * property.price_per_night) + _fee);
+                setNights(dayCount);
+            } else {
+                const _fee = (property.price_per_night / 100) * 5;
+
+                setFee(_fee);
+                setTotalPrice(property.price_per_night + _fee);
+                setNights(1);
+            }
+        }
+    }, [dateRange])
+
+
 
   return (
     <aside className="mt-6 p-6 col-span-2 rounded-xl border border-gray-300 shadow-xl">
-      <h2 className="mb-5 text-2xl">1박 요금</h2>
+      <h2 className="mb-5 text-2xl"> {property.price_per_night.toLocaleString()}  / 1박 요금</h2>
 
       <div className="mb-6 p-3 border border-gray-400 rounded-xl">
         <label className="mb-2 block font-bold text-xs">인원</label>
-
-        <select className="w-full -ml-1 text-sm">
-          <option value="1">1명</option>
-          <option value="2">2명</option>
-          <option value="3">3명</option>
-          <option value="4">4명</option>
-          <option value="5">5명</option>
+        <select 
+          value={guests}
+          onChange={(e) => setGuests(e.target.value)}
+          className="w-full -ml-1 text-sm">
+              {guestsRange.map((guest) => (
+                <option key={guest} value={guest}>{guest}</option>
+              ))}
         </select>
       </div>
 
@@ -27,9 +85,10 @@ const ReservationSidebar: React.FC = () => {
         예약하기
       </div>
 
+
       <div className="mb-4 flex justify-between items-center">
-        <p>* {nights}박</p>
-        <p>{(price_per_night * nights).toLocaleString()}원</p>
+        <p>{(property.price_per_night).toLocaleString()}원 *  {nights}박</p>
+        <p>{(property.price_per_night * nights).toLocaleString()} 원</p>
       </div>
 
       <div className="mb-4 flex justify-between items-center">

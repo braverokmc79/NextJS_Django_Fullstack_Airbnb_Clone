@@ -26,5 +26,26 @@ class Property(models.Model):
         return f'{settings.WEBSITE_URL}{self.image.url}'
 
     class Meta:
-        verbose_name = "숙소"
-        verbose_name_plural = "숙소 목록"
+        verbose_name = "숙소(Property)"
+        verbose_name_plural = "숙소목록(Properties)"
+
+
+class Reservation(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, verbose_name="ID")
+    property = models.ForeignKey(Property, related_name='reservations', on_delete=models.CASCADE, verbose_name="예약한 숙소")
+    start_date = models.DateField(verbose_name="체크인 날짜")
+    end_date = models.DateField(verbose_name="체크아웃 날짜")
+    number_of_nights = models.IntegerField(verbose_name="숙박 일수")
+    guests = models.IntegerField(verbose_name="투숙 인원")
+    total_price = models.FloatField(verbose_name="총 예약 금액")
+    created_by = models.ForeignKey(User, related_name='reservations', on_delete=models.CASCADE, verbose_name="예약자")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="예약 생성일")
+
+    def __str__(self):
+        return f"{self.property.title} - {self.created_by.email} ({self.start_date} ~ {self.end_date})"
+
+    class Meta:
+        verbose_name = "예약(Reservation)"
+        verbose_name_plural = "예약 목록(Reservations)"
+
+    
