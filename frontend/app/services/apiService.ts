@@ -3,10 +3,9 @@ import { getAccessToken } from "../lib/actions";
 const API_HOST = process.env.NEXT_PUBLIC_API_HOST;
 
 const apiService = {
-  // GET 요청
+  // ✅ GET 요청
   get: async (url: string): Promise<any> => {
-    console.log("GET:", url);
-
+    //console.log("📡 GET 요청:", `${API_HOST}${url}`);
     try {
       const response = await fetch(`${API_HOST}${url}`, {
         method: "GET",
@@ -15,18 +14,17 @@ const apiService = {
           "Content-Type": "application/json",
         },
       });
-
-      const json = await response.json();
-      console.log("Response:", json);
-      return json;
+      
+      return await response.json();
     } catch (error) {
+      console.error("❗️GET 요청 실패:", error);
       throw error;
     }
   },
 
-  // POST 요청 (Bearer Token 포함)
+  // ✅ POST 요청 (Bearer Token 포함, 유연한 body 처리)
   post: async (url: string, data: any): Promise<any> => {
-    console.log("🎈 POST:", url, data);
+   // console.log("🎈 POST 요청:", `${API_HOST}${url}`, data);
 
     const token = await getAccessToken();
 
@@ -38,56 +36,58 @@ const apiService = {
           "Content-Type": "application/json",
         },
         body: data,
+
       });
 
-      const json = await response.json();
-      console.log("Response:", json);
-      return json;
+     return await response.json();
+
     } catch (error) {
+      console.error("❗️POST 요청 실패:", error);
       throw error;
     }
   },
 
-  // POST 요청 (Token 없이)
-  postWithoutToken: async (url: string, data: any): Promise<any> => {
-    console.log("POST (no token):", url, data);
-
-    try {
-      const response = await fetch(`${API_HOST}${url}`, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: data,
-      });
-
-      const json = await response.json();
-      console.log("Response:", json);
-      return json;
-    } catch (error) {
-      throw error;
-    }
+    // ✅ POST 요청 (Token 없이, 유연한 body 처리)
+      postWithoutToken: async (url: string, data: any): Promise<any> => {
+        try {
+       
+          const response = await fetch(`${API_HOST}${url}`, {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type":  "application/json",
+            },
+            body:  JSON.stringify(data),
+          });
+          
+          return await response.json();
+        
+        } catch (error) {
+          console.error("❗️POST(no token) 실패:", error);
+          throw error;
+        }
   },
 
-  // 파일 업로드 (FormData 등)
+
+  // ✅ 파일 업로드 (FormData 사용)
   fileUpload: async (url: string, data: FormData): Promise<any> => {
-    console.log("File upload:", url);
+   // console.log("📤 파일 업로드:", `${API_HOST}${url}`);
+
     const token = await getAccessToken();
 
     try {
       const response = await fetch(`${API_HOST}${url}`, {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${token}`,        
+          Authorization: `Bearer ${token}`,
+          // FormData 사용 시 Content-Type은 생략 (자동 설정됨)
         },
         body: data,
       });
 
-      const json = await response.json();
-      console.log("Response:", json);
-      return json;
+      return await response.json();
     } catch (error) {
+      console.error("❗️파일 업로드 실패:", error);
       throw error;
     }
   },

@@ -14,7 +14,7 @@ const SignupModal: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
-  const [errors, setErrors] = useState<string[]>(['sssss']);
+  const [errors, setErrors] = useState<string[]>(['']);
 
 
 
@@ -26,10 +26,11 @@ const SignupModal: React.FC = () => {
     }
 
   try {
-      const response = await apiService.post("/api/auth/register/", JSON.stringify(formData));
+      const response = await apiService.postWithoutToken("/api/auth/register/", formData);
 
       if (response.access) {
         signupModal.close();
+        alert("회원가입을 축하합니다.");
         router.push("/");
         router.refresh();
       } else {
