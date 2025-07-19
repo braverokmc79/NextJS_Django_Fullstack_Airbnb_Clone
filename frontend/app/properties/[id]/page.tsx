@@ -15,6 +15,8 @@ const PropertyDetailPage:React.FC<PropertyDetailPageProps> = async({params}) => 
   const userId = await getUserId();
 
  
+  console.log(" property  :",property);
+  
 
   return (
     <main className="max-w-[1500px] mx-auto px-6 pb-6">
@@ -38,6 +40,7 @@ const PropertyDetailPage:React.FC<PropertyDetailPageProps> = async({params}) => 
                     <hr />
 
                     <Link 
+
                         href={`/landlords/${property.landlord.id}`}
                         className="py-6 flex items-center space-x-4"
                     >
@@ -51,7 +54,7 @@ const PropertyDetailPage:React.FC<PropertyDetailPageProps> = async({params}) => 
                             />
                         )}
 
-                        <p><strong>{property.landlord.name}</strong> is your host</p>
+                        <p><strong>{property.landlord.name}</strong> 호스트가 올린 숙소들</p> 
                     </Link>
 
                     <hr />

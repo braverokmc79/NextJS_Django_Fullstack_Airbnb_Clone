@@ -11,20 +11,36 @@ export type PropertyType = {
   image_url: string;
 };
 
-const PropertyList = () => {
+interface PropertyListProps {  
+   landlord_id?: string | null;
+}
+
+
+const PropertyList:React.FC<PropertyListProps> = ({landlord_id}) => {
   const [properties, setProperties] = useState<PropertyType[]>([]);
 
-  useEffect(() => {
-    const properties = apiService.get("/api/properties/");
-    properties.then((response) => {
-      setProperties(response.data);
-    });
+  const getProperties = async () => {
+    let url ='/api/properties/';
 
+    if(landlord_id){
+      //landlord_id 값이 존재하면은
+      url += `?landlord_id=${landlord_id}`;
+    }
+
+    const tmpProperties = await apiService.get(url);
+
+    setProperties(tmpProperties.data);
+  };
+
+
+  useEffect(() => {
+    getProperties();
   }, []);  
 
+
+
   return (
-    <>
-    
+    <>  
       {Array.isArray(properties) &&
         properties.map((property) => (
           <PropertyListItem key={property.id} property={property} />
