@@ -41,10 +41,7 @@ const ReservationSidebar: React.FC<ReservationSidebarProps> = ({userId,property}
 
   const performBooking=async()=>{
     console.log("✅ performBooking ", userId);
-
-
     if(userId){      
-
 
       if(dateRange.startDate&& dateRange.endDate){
          const payload = {
@@ -84,8 +81,31 @@ const ReservationSidebar: React.FC<ReservationSidebarProps> = ({userId,property}
             endDate: newEndDate
         })
     }
+
+
+    const getReservations =async () =>{   
+      const reservations =await apiService.get(`/api/properties/${property.id}/reservations/`);
+      
+      let dates:Date[] =[];
+
+      reservations.forEach((reservation:any) => {
+        const range = eachDayOfInterval({
+            start: new Date(reservation.start_date),
+            end: new Date(reservation.end_date),
+        });
+        dates = [...dates, ...range];
+      });
+
+      console.log('😍dates', dates);
+      setBookedDates(dates);
+  }
+
+
+
+  
     useEffect(() => {
-     
+        getReservations();
+
         if (dateRange.startDate && dateRange.endDate) {
             const dayCount = differenceInDays(
                 dateRange.endDate,
@@ -106,7 +126,11 @@ const ReservationSidebar: React.FC<ReservationSidebarProps> = ({userId,property}
                 setNights(1);
             }
         }
-    }, [dateRange])
+  }, [dateRange])
+
+
+
+
 
 
 
