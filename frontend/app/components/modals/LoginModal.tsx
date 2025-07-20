@@ -31,8 +31,9 @@ const LoginModal: React.FC = () => {
         handleLogin(response.user.pk, response.access, response.refresh);
         
         LoginModal.close();        
-        router.push("/");
+        // router.push("/");
         router.refresh();
+        window.location.reload();
       } else {
          setErrors(response.non_field_errors);
       }
