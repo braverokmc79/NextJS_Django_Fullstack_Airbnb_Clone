@@ -15,8 +15,8 @@ const apiService = {
           "Content-Type": "application/json",
         },
       });
-      console.log("📡 GET 요청 response:", response)
-      ;
+      console.log("📡 GET 요청 response:", response);
+      
       return await response.json();
     } catch (error) {
       console.error("❗️GET 요청 실패:", error);
