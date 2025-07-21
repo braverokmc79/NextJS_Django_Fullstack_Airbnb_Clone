@@ -39,15 +39,43 @@ const UserNav:React.FC<UserNavProps>=({userId})=>{
                     {userId ? (
                         <>   
 
-                          <MenuLink
-                            label="나의 숙소"
-                            onClick={() => {                              
-                                setIsOpen(false);
-                                router.push(`/myproperties`);
-                            } }
+                            <MenuLink
+                                label='쪽지함'
+                                onClick={() => {
+                                    setIsOpen(false);
+                                    router.push('/inbox');
+                                }}
                             />
 
-                            <LogoutButton setIsOpen={setIsOpen} />
+                            <MenuLink
+                                label='내 숙소 목록'
+                                onClick={() => {
+                                    setIsOpen(false);
+                                    router.push('/myproperties');
+                                }}
+                            />
+
+                            <MenuLink
+                                label='찜한 숙소'
+                                onClick={() => {
+                                    setIsOpen(false);
+                                    router.push('/myfavorites');
+                                }}
+                            />
+
+                            <MenuLink
+                                label='예약 내역'
+                                onClick={() => {
+                                    setIsOpen(false);
+                                    router.push('/myreservations');
+                                }}
+                            />
+
+
+
+                       <LogoutButton setIsOpen={setIsOpen} />
+
+
 
 
                         </>

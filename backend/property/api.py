@@ -147,17 +147,17 @@ def book_property(request, pk):
 
 
 
-# ✅ 숙소 즐겨찾기 토글 API (POST)
+# ✅ 숙소 찜 토글 API (POST)
 @api_view(['POST'])
 def toggle_favorite(request, pk):
     # 숙소 객체 조회
     property = Property.objects.get(pk=pk)
 
-    # 유저가 이미 즐겨찾기 한 경우 → 제거
+    # 유저가 이미 찜 한 경우 → 제거
     if request.user in property.favorited.all():
         property.favorited.remove(request.user)
         return JsonResponse({'is_favorite': False})
     else:
-        # 즐겨찾기 안한 경우 → 추가
+        # 찜 안한 경우 → 추가
         property.favorited.add(request.user)
         return JsonResponse({'is_favorite': True})
