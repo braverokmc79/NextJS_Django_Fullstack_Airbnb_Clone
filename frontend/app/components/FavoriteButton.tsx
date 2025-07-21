@@ -23,7 +23,7 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({
             markFavorite(response.is_favorite);
             setFavorite(response.is_favorite);
         } catch (error) {
-            console.error("즐겨찾기 전환 중 오류 발생:", error);            
+            console.error("찜 전환 중 오류 발생:", error);            
         }
     };
 
@@ -32,7 +32,7 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({
 
     return (
         <button onClick={toggleFavorite}
-             aria-label={favorite ? "즐겨찾기 제거" : "즐겨찾기 추가"}
+             aria-label={favorite ? "찜 제거" : "찜 추가"}
              className={`absolute top-2 right-2 ${favorite ? 'text-airbnb' : 'text-white'} hover:text-airbnb cursor-pointer`}
         >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
