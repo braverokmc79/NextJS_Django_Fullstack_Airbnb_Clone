@@ -6,11 +6,10 @@ import UserNav from './UserNav'
 import AddPropertyButton from './AddPropertyButton'
 import { getUserId } from '@/app/lib/actions'
 
+
+
 const Navbar =async () => {
-
   const userId=await getUserId();
-
- 
 
   return (
     <nav className='w-full fixed top-0 left-0 py-6 border-b border-gray-200  bg-white z-10'>

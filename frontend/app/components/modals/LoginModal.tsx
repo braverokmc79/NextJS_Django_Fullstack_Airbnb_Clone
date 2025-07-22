@@ -6,6 +6,7 @@ import useLoginModal from "@/app/hooks/useLoginModal";
 import apiService from "@/app/services/apiService";
 import { useRouter } from "next/navigation";
 import { handleLogin } from "@/app/lib/actions";
+import { useAuthStore } from "@/app/hooks/useAuthStore";
 
 
 
@@ -15,6 +16,9 @@ const LoginModal: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<string[]>([]);
+
+  const setUserId=useAuthStore((state) => state.setUserId);
+
 
   const submitLogin = async () => {
       const formData = {
@@ -31,9 +35,12 @@ const LoginModal: React.FC = () => {
         handleLogin(response.user.pk, response.access, response.refresh);
         
         LoginModal.close();        
-        //router.push("/");
+        router.push("/");
+       
+        
+        setUserId(response.user.pk); // 전역 상태에 저장
         router.refresh();
-        window.location.href = "/";
+        
       } else {
          setErrors(response.non_field_errors);
       }

@@ -5,6 +5,7 @@ import useLoginModal from "@/app/hooks/useLoginModal";
 import useSignupModal from "@/app/hooks/useSignupModal";
 import LogoutButton from "../LogoutButton";
 import { useRouter } from "next/navigation";
+import { useAuthStore } from "@/app/hooks/useAuthStore";
 
 
 interface UserNavProps{
@@ -16,7 +17,7 @@ const UserNav:React.FC<UserNavProps>=({userId})=>{
     const loginModal = useLoginModal();
     const signupModal = useSignupModal();
     const [isOpen, setIsOpen] = useState(false);
-
+    const useAuth= useAuthStore((state) => state.userId);
 
     return(
         <div className="p-2 relative inline-block border border-gray-300 rounded-full">
@@ -36,7 +37,7 @@ const UserNav:React.FC<UserNavProps>=({userId})=>{
             {isOpen && (
                 <div className="w-[220px] absolute top-[60px] right-0 bg-white border 
                         rounded-xl shadow-md flex flex-col border-gray-300">
-                    {userId ? (
+                    {useAuth ? (
                         <>   
 
                             <MenuLink
