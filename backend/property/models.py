@@ -26,8 +26,8 @@ class Property(models.Model):
         return f'{settings.WEBSITE_URL}{self.image.url}'
 
     class Meta:
-        verbose_name = "숙소(Property)"
-        verbose_name_plural = "숙소목록(Properties)"
+        verbose_name = "Property(숙소)"
+        verbose_name_plural = "Properties(숙소목록)"
 
 
 class Reservation(models.Model):
@@ -45,7 +45,7 @@ class Reservation(models.Model):
         return f"{self.property.title} - {self.created_by.email} ({self.start_date} ~ {self.end_date})"
 
     class Meta:
-        verbose_name = "예약(Reservation)"
-        verbose_name_plural = "예약 목록(Reservations)"
+        verbose_name = "Reservation(예약)"
+        verbose_name_plural = "Reservations(예약 목록)"
 
     
