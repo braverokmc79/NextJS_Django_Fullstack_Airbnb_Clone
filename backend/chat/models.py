@@ -19,7 +19,7 @@ class ConversationMessage(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, verbose_name="메시지 ID")
     conversation = models.ForeignKey(Conversation, related_name='messages', on_delete=models.CASCADE, verbose_name="대화")
     body = models.TextField(verbose_name="메시지 내용")
-    send_to = models.ForeignKey(User, related_name='received_messages', on_delete=models.CASCADE, verbose_name="수신자")
+    sent_to = models.ForeignKey(User, related_name='received_messages', on_delete=models.CASCADE, verbose_name="수신자")
     created_by = models.ForeignKey(User, related_name='sent_messages', on_delete=models.CASCADE, verbose_name="보낸 사람")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="보낸 시간")
 
@@ -28,4 +28,4 @@ class ConversationMessage(models.Model):
         verbose_name_plural = "ConversationMessage(대화 메시지 목록)"
 
     def __str__(self):
-        return f"{self.created_by} → {self.send_to}"
+        return f"{self.created_by} → {self.sent_to}"

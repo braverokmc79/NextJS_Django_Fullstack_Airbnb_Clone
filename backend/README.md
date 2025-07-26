@@ -79,6 +79,17 @@ docker run -p 8000:8000 djangobnb-backend
 
 ---
 
+## 슈퍼유저생성
+
+```bash
+
+docker compose exec djangobnb_backend bash
+
+python manage.py createsuperuser
+
+```
+
+
 ## 🌐 API 테스트
 
 * `/api/auth/` - 회원가입/로그인/로그아웃
@@ -87,3 +98,5 @@ docker run -p 8000:8000 djangobnb-backend
 
 
 ---
+
+

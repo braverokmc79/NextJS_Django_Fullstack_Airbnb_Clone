@@ -25,13 +25,14 @@ const InboxPage:React.FC = async () => {
         )
     }
 
-    const conversations = await apiService.get('/api/chat/')
-
+    const conversations = await apiService.get('/api/chat/');
+    console.log(" conversations  ", conversations);
+    
     return (
         <main className="max-w-[1500px] mx-auto px-6 pb-6 space-y-4">
             <h1 className="my-6 text-2xl">📬메시지함</h1>
 
-            {conversations.map((conversation: ConversationType) => {
+            {conversations&& conversations.map((conversation: ConversationType) => {
                 return (
                     <Conversation 
                         userId={userId}

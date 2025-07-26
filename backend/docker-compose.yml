@@ -4,7 +4,8 @@ services:
   djangobnb_backend:
     build: .
     container_name: djangobnb_backend  # 이름 지정해도 되지만 exec는 '서비스 이름' 기준
-    command: python manage.py runserver 0.0.0.0:8000
+    #command: python manage.py runserver 0.0.0.0:8000
+    command: daphne -b 0.0.0.0 -p 8000 config.asgi:application  # ✅ 여기만 변경
     volumes:
       - .:/usr/src/djangobnb_backend/
     ports:
