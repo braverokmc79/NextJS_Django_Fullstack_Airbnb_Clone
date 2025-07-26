@@ -12,10 +12,11 @@ const apiService = {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
+          'Accept': 'application/json',
           "Content-Type": "application/json",
         },
       });
-      console.log("📡 GET 요청 response:", response);
+      //console.log("📡 GET 요청 response:", response);
       
       return await response.json();
     } catch (error) {
