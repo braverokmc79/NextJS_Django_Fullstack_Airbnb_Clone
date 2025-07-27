@@ -94,7 +94,7 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
                 {realtimeMessages.map((message, index) => (
                     <div
                         key={index}
-                        className={`w-[80%]py-4 px-6 rounded-xl ${message.name == myUser?.name ? 'ml-[20%] bg-blue-200' : 'bg-gray-200'}`}
+                        className={`w-[80%] py-4 px-6 rounded-xl ${message.name == myUser?.name ? 'ml-[20%] bg-blue-200' : 'bg-gray-200'}`}
                     >
                         <p className="font-bold text-gray-500">{message.name}</p>
                         <p>{message.body}</p>
