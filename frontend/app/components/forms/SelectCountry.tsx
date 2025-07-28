@@ -27,6 +27,7 @@ const SelectCountry: React.FC<SelectCountryProps> = ({
                 placeholder="Anywhere"
                 options={getAll()}
                 value={value}
+                required
                 onChange={(value) => onChange(value as SelectCountryValue)}
             />
         </>

@@ -1,3 +1,4 @@
+# pip install -r requirements.txt 
 # Django Framework
 Django==5.2.1
 
@@ -42,3 +43,5 @@ pytest-django
 
 # Admin theme
 django-jazzmin>=2.6.0
+
+matplotlib==3.9.0
