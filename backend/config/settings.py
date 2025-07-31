@@ -29,6 +29,8 @@ ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "localhost,127.0.0.1").split(","
 AUTH_USER_MODEL = 'useraccount.User'
 SITE_ID = 1
 
+
+
 WEBSITE_URL = os.environ.get("WEBSITE_URL", "http://localhost:8000" if DEBUG else "http://your-production-url")
 
 CHANNEL_LAYERS = {
@@ -64,6 +66,9 @@ REST_FRAMEWORK = {
 
 CORS_ALLOWED_ORIGINS = os.environ.get("CORS_ALLOWED_ORIGINS", "http://127.0.0.1:8000,http://127.0.0.1:3000").split(',')
 CSRF_TRUSTED_ORIGINS = CORS_ALLOWED_ORIGINS
+CORS_ORIGINS_WHITELIST = CORS_ALLOWED_ORIGINS
+
+
 CORS_ALLOW_ALL_ORIGINS = True
 
 REST_AUTH = {

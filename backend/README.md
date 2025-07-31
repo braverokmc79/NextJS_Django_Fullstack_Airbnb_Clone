@@ -75,7 +75,15 @@ python manage.py runserver
 # 빌드 및 실행
 docker build -t djangobnb-backend .
 docker run -p 8000:8000 djangobnb-backend
+
+
+--- 배포시
+docker-compose -f docker-compose.prod.yml up --build
+
 ```
+
+
+
 
 ---
 
