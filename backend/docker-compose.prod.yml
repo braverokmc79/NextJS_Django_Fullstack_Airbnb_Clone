@@ -1,5 +1,7 @@
 #version: '3.8'
 #실행:  docker compose -f .\docker-compose.prod.yml up --build
+#서버 백그라운드 실행 docker compose -f ./docker-compose.prod.yml up -d --build
+
 
 services:
   nginx:
@@ -14,6 +16,7 @@ services:
   
   web:
     build: .
+    container_name: web-airbnb
     command: gunicorn config.wsgi:application --bind 0.0.0.0:8000      
     volumes:
       - .:/usr/src/djangobnb_backend/
@@ -42,7 +45,7 @@ services:
 
 
   db:
-    image: postgres:15
+    image: postgres:16
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:

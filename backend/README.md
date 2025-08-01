@@ -97,6 +97,14 @@ python manage.py createsuperuser
 
 ```
 
+```bash
+
+docker compose -f docker-compose.prod.yml exec web bash
+
+python manage.py createsuperuser
+
+```
+
 
 ## 🌐 API 테스트
 

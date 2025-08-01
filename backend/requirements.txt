@@ -30,7 +30,7 @@ sqlparse==0.5.3
 psycopg2-binary==2.9.9
 dj-database-url
 
-# 이미지 처리
+# image process
 Pillow==10.2.0
 
 # distribution
