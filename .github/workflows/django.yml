@@ -14,7 +14,6 @@ jobs:
       matrix:
         python-version: [3.12.3]
 
-
     services:
       postgres:
         image: postgres:16
@@ -29,7 +28,6 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5        
-
 
     steps:
       - uses: actions/checkout@v4
@@ -54,21 +52,20 @@ jobs:
 
       - name: Run Migrations
         run: |
+          python manage.py makemigrations --noinput
           python manage.py migrate --noinput
         working-directory: backend
 
       - name: Run Tests
         run: |
-          python manage.py makemigrations --noinput
-          python manage.py migrate --noinput
           python manage.py test
         working-directory: backend
 
   deploy:
     name: ✅ Deploy to Production Server
     runs-on: ubuntu-latest
-    needs: build  # ✅ build job 끝내서 분기
-    if: github.ref == 'refs/heads/main'  # ✅ main 브랜치에만 배포
+    needs: build
+    if: github.ref == 'refs/heads/main'
 
     steps:
       - name: SSH & Deploy to Server
@@ -87,4 +84,3 @@ jobs:
             docker compose -f docker-compose.real.yml up -d --build
             docker compose -f docker-compose.real.yml exec ai_rest_backend python manage.py migrate --noinput
             docker compose -f docker-compose.real.yml exec ai_rest_backend python manage.py collectstatic --noinput
-
