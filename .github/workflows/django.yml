@@ -82,5 +82,5 @@ jobs:
             docker compose down
             docker compose -f docker-compose.real.yml down
             docker compose -f docker-compose.real.yml up -d --build
-            docker compose -f docker-compose.real.yml exec ai_rest_backend python manage.py migrate --noinput
-            docker compose -f docker-compose.real.yml exec ai_rest_backend python manage.py collectstatic --noinput
+            docker compose -f docker-compose.real.yml exec web python manage.py migrate --noinput
+            docker compose -f docker-compose.real.yml exec web python manage.py collectstatic --noinput
