@@ -14,6 +14,8 @@ ENV = os.environ.get("ENV", "dev")
 # 2. 환경별 .env 파일 분기 로드
 if ENV == "prod":
     load_dotenv(dotenv_path=BASE_DIR / ".env.prod", override=True)
+elif ENV == "test":
+    load_dotenv(dotenv_path=BASE_DIR / ".env.test", override=True)    
 else:
     load_dotenv(dotenv_path=BASE_DIR / ".env.dev", override=True)
     

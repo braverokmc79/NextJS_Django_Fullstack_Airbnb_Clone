@@ -40,7 +40,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Set environment for CI
-        run: echo "GITHUB_ACTIONS=true" >> $GITHUB_ENV
+        run: echo "GITHUB_ACTIONS=true" >> $GITHUB_ENV && echo "ENV=test" >> $GITHUB_ENV
 
       - name: Load .env.test for CI
         run: cp .env.test .env
