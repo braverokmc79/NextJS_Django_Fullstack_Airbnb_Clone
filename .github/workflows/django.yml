@@ -14,6 +14,23 @@ jobs:
       matrix:
         python-version: [3.12.3]
 
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgresuser
+          POSTGRES_PASSWORD: postgrespassword
+          POSTGRES_DB: djangobnb
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5        
+
+
     steps:
       - uses: actions/checkout@v4
 
@@ -24,6 +41,10 @@ jobs:
 
       - name: Set environment for CI
         run: echo "GITHUB_ACTIONS=true" >> $GITHUB_ENV
+
+      - name: Load .env.test for CI
+        run: cp .env.test .env
+        working-directory: backend
 
       - name: Install Dependencies
         run: |
