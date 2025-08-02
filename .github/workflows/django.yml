@@ -1,10 +1,11 @@
 name: Django CI/CD
 
+
 on:
   push:
-    branches: [ "main", "dev" ]
-  pull_request:
-    branches: [ "main", "dev" ]
+     paths:
+      - 'backend/**' # backend/만 감지해서 백엔드 배포
+
 
 jobs:
   build:

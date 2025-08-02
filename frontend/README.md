@@ -1,5 +1,29 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+
+## ✅ Next.js의 .env 파일 인식 규칙
+
+Next.js에서는 아래와 같은 규칙으로 .env 파일을 로드합니다:
+
+NODE_ENV 값	자동으로 로드되는 파일
+
+| NODE\_ENV 값      | 자동으로 로드되는 파일                                       |
+| ---------------- | -------------------------------------------------- |
+| development (기본) | `.env`, `.env.development.local`, `.env.local`     |
+| production       | `.env`, `.env.production`, `.env.production.local` |
+| test             | `.env`, `.env.test`, `.env.test.local`             |
+
+✅ NODE_ENV=production일 때만 .env.production이 로드됨
+✅ NODE_ENV=prod는 아무런 의미 없음 → Next.js가 무시함
+
+그리고 빌드/실행 시 다음처럼 실행:
+
+```
+NODE_ENV=production next build
+NODE_ENV=production next start
+
+```
+
 ## Getting Started
 
 First, run the development server:

@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
+    "prod": "cross-env NODE_ENV=production next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -11,6 +12,7 @@
   "dependencies": {
     "@heroicons/react": "^2.2.0",
     "@tailwindcss/cli": "^4.1.11",
+    "cross-env": "^10.0.0",
     "date-fns": "^4.1.0",
     "next": "15.3.5",
     "postcss": "^8.5.6",
