@@ -75,7 +75,9 @@ export async function handleLogin(userId: string, accessToken: string, refreshTo
 
 
 export async function resetAuthCookies() {
-    await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/logout`, { method: 'POST' });
+    await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/api/logout`, {
+      method: "POST",
+    });
 }
 
 
