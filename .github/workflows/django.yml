@@ -10,7 +10,7 @@ on:
 jobs:
   build:
     name: Run Django Tests
-    runs-on:  [self-hosted] #ubuntu-latest
+    runs-on:  [self-hosted, 'python'] #ubuntu-latest
     strategy:
       matrix:
         python-version: [3.12.3]
