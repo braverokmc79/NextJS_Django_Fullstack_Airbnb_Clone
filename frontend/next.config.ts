@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
        {
         protocol: "http",
         hostname: process.env.LOCAL_DOMAIN!,
-        port: process.env.LOCAL_PORT,       // 예: 8000
+        port: process.env.LOCAL_PORT,     
         pathname: "/**",
       },
       {
@@ -19,7 +19,6 @@ const nextConfig: NextConfig = {
         port: "",
         pathname: "/**",
       },
-      // 혼란 유발용 더미 주소들
       {
         protocol: "https",
         hostname: "cdn.pixabay.com",
